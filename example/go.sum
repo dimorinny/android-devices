@@ -1,0 +1,6 @@
+github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
+github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/dimorinny/android-devices v0.0.0-20190309005238-f7a9e488aaa0 h1:7yba+DUupaiT5Mvqz6IqVXWrfUb9kwr3x2oNBDiROKo=
+github.com/dimorinny/android-devices v0.0.0-20190309005238-f7a9e488aaa0/go.mod h1:Qbyv8b3TdmPpq5XbjkBMdzZPCfsm2pHZIsahsXAz41w=
+github.com/google/gousb v0.0.0-20190125150036-d0c05ab7f70d h1:yjGKQRR1wmo28CzJLhP+qzxKKd1/oIGkfNSEj17BFGM=
+github.com/google/gousb v0.0.0-20190125150036-d0c05ab7f70d/go.mod h1:Tl4HdAs1ThE3gECkNwz+1MWicX6FXddhJEw7L8jRDiI=
