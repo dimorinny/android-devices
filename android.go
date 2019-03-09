@@ -51,9 +51,20 @@ func getDevicesDescriptions(context *gousb.Context) ([]*gousb.DeviceDesc, error)
 }
 
 func isAndroidDevice(description *gousb.DeviceDesc) bool {
-	return description.Class == usbInterfaceAdbClass &&
-		description.SubClass == usbInterfaceAdbSubclass &&
-		description.Protocol == usbInterfaceAdbPortocol
+	for _, configuration := range description.Configs {
+		for _, usbInterface := range configuration.Interfaces {
+			for _, interfaceConfiguration := range usbInterface.AltSettings {
+				if interfaceConfiguration.Class == usbInterfaceAdbClass &&
+					interfaceConfiguration.SubClass == usbInterfaceAdbSubclass &&
+					interfaceConfiguration.Protocol == usbInterfaceAdbPortocol {
+
+					return true
+				}
+			}
+		}
+	}
+
+	return false
 }
 
 // TODO: fetch description
