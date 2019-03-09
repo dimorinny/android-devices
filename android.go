@@ -68,7 +68,6 @@ func isAndroidDevice(description *gousb.DeviceDesc) bool {
 	return false
 }
 
-// TODO: fetch description
 func mapLibUsbDevicesToInternalModel(description *gousb.DeviceDesc) *Device {
 	return &Device{
 		Description: usbid.Describe(description),
