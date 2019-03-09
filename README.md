@@ -1,7 +1,6 @@
 ## Detect connected android devices
 
-Example:
-```
+```go
 package main
 
 import (
@@ -19,4 +18,17 @@ func main() {
 	spew.Dump(devices)
 }
 
+```
+
+Example output:
+```
+([]*android.Device) (len=1 cap=1) {
+ (*android.Device)(0xc0004a18f0)({
+  Description: (string) (len=43) "Galaxy (MTP) (Samsung Electronics Co., Ltd)",
+  Bus: (int) 1,
+  Address: (int) 9,
+  Vendor: (int) 1256,
+  Product: (int) 26720
+ })
+}
 ```
