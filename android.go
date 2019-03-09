@@ -2,13 +2,14 @@ package android
 
 import (
 	"github.com/google/gousb"
+	"github.com/google/gousb/usbid"
 	"log"
 )
 
 const (
 	usbInterfaceAdbClass    gousb.Class    = 0xFF
 	usbInterfaceAdbSubclass gousb.Class    = 0x42
-	usbInterfaceAdbPortocol gousb.Protocol = 0x1
+	usbInterfaceAdbProtocol gousb.Protocol = 0x1
 )
 
 func Devices() ([]*Device, error) {
@@ -56,7 +57,7 @@ func isAndroidDevice(description *gousb.DeviceDesc) bool {
 			for _, interfaceConfiguration := range usbInterface.AltSettings {
 				if interfaceConfiguration.Class == usbInterfaceAdbClass &&
 					interfaceConfiguration.SubClass == usbInterfaceAdbSubclass &&
-					interfaceConfiguration.Protocol == usbInterfaceAdbPortocol {
+					interfaceConfiguration.Protocol == usbInterfaceAdbProtocol {
 
 					return true
 				}
@@ -70,7 +71,7 @@ func isAndroidDevice(description *gousb.DeviceDesc) bool {
 // TODO: fetch description
 func mapLibUsbDevicesToInternalModel(description *gousb.DeviceDesc) *Device {
 	return &Device{
-		Description: "",
+		Description: usbid.Describe(description),
 
 		Bus:     description.Bus,
 		Address: description.Address,
