@@ -1,7 +1,6 @@
 package android
 
 import (
-	"errors"
 	"github.com/google/gousb"
 	"log"
 )
@@ -15,27 +14,33 @@ func Devices() ([]*Device, error) {
 		}
 	}()
 
-	devices, err := context.OpenDevices(isAndroidDevice)
-
-	defer func() {
-		for _, device := range devices {
-			_ := device.Close()
-		}
-	}()
-
+	devices, err := getDevicesDescriptions(context)
 	if err != nil {
 		return nil, err
 	}
 
 	var result []*Device
 	for _, device := range devices {
-		result = append(
-			result,
-			mapLibUsbDevicesToInternalModel(device.Desc),
-		)
+		if isAndroidDevice(device) {
+			result = append(
+				result,
+				mapLibUsbDevicesToInternalModel(device),
+			)
+		}
 	}
 
-	return nil, errors.New("error")
+	return result, nil
+}
+
+func getDevicesDescriptions(context *gousb.Context) ([]*gousb.DeviceDesc, error) {
+	var devices []*gousb.DeviceDesc
+
+	_, err := context.OpenDevices(func(description *gousb.DeviceDesc) bool {
+		devices = append(devices, description)
+		return false
+	})
+
+	return devices, err
 }
 
 // TODO detect android device
