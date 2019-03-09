@@ -5,6 +5,12 @@ import (
 	"log"
 )
 
+const (
+	usbInterfaceAdbClass    gousb.Class    = 0xFF
+	usbInterfaceAdbSubclass gousb.Class    = 0x42
+	usbInterfaceAdbPortocol gousb.Protocol = 0x1
+)
+
 func Devices() ([]*Device, error) {
 	context := gousb.NewContext()
 	defer func() {
@@ -37,15 +43,17 @@ func getDevicesDescriptions(context *gousb.Context) ([]*gousb.DeviceDesc, error)
 
 	_, err := context.OpenDevices(func(description *gousb.DeviceDesc) bool {
 		devices = append(devices, description)
+		// avoid device opening
 		return false
 	})
 
 	return devices, err
 }
 
-// TODO detect android device
 func isAndroidDevice(description *gousb.DeviceDesc) bool {
-	return true
+	return description.Class == usbInterfaceAdbClass &&
+		description.SubClass == usbInterfaceAdbSubclass &&
+		description.Protocol == usbInterfaceAdbPortocol
 }
 
 // TODO: fetch description
