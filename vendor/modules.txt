@@ -1,3 +1,4 @@
-# github.com/google/gousb v0.0.0-20190125150036-d0c05ab7f70d
+# github.com/google/gousb v0.0.0-20190812193832-18f4c1d8a750
+## explicit
 github.com/google/gousb
 github.com/google/gousb/usbid
